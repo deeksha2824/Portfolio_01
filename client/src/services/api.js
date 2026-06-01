@@ -1,4 +1,4 @@
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://portfolio-01-6cc2.onrender.com';
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://portfolio-01-6cc2.onrender.com/api';
 
 export function getVisitorId() {
   const key = 'portfolio-visitor-id';
