@@ -23,9 +23,9 @@ export const profile = {
   linkedin: 'https://www.linkedin.com/in/deeksha-gowda-1632b5262/',
   github: 'https://github.com/',
   resumeUrl: '/Deeksha_Gowda_Resume.pdf',
-  roles: ['React Developer', 'AI Enthusiast', 'Cybersecurity Learner', 'Full-Stack Builder'],
+  roles: ['React Developer', 'AI Enthusiast', 'Cybersecurity Learner', 'Full-Stack Builder', 'UI Designer'],
   summary:
-    'Final-year Computer Science Engineering student with strong fundamentals in programming, web development, cybersecurity, and AI. Hands-on experience through internships and real-world projects, with a practical focus on building reliable software systems.',
+    'Computer Science Engineering graduate with a strong foundation in programming, web development, cybersecurity, and AI. Experienced through internships and real-world projects, with a practical approach to building reliable software systems, intuitive digital experiences, and technology-driven solutions.',
   strengths: ['Detail-oriented execution', 'Fast learner', 'Problem-solving mindset', 'Creative visual thinking']
 };
 
