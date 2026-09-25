@@ -31,9 +31,9 @@ export const profile = {
 
 export const stats = [
   { label: 'CGPA', value: '8.2' },
-  { label: 'Internships', value: '3' },
+  { label: 'Internships', value: '3+' },
   { label: 'Projects', value: '3+' },
-  { label: 'Certifications', value: '4' }
+  { label: 'Certifications', value: '4+' }
 ];
 
 export const education = [
