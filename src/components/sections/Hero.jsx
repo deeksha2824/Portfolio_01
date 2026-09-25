@@ -15,17 +15,20 @@ function useTyping(words) {
     const current = words[wordIndex];
     const doneTyping = letterCount === current.length;
     const doneDeleting = letterCount === 0;
+
     const timeout = window.setTimeout(
       () => {
         if (!deleting && doneTyping) {
           setDeleting(true);
           return;
         }
+
         if (deleting && doneDeleting) {
           setDeleting(false);
           setWordIndex((index) => (index + 1) % words.length);
           return;
         }
+
         setLetterCount((count) => count + (deleting ? -1 : 1));
       },
       deleting ? 38 : doneTyping ? 1200 : 72
@@ -41,9 +44,18 @@ export function Hero() {
   const typedRole = useTyping(profile.roles);
 
   return (
-    <section id="home" className="relative min-h-screen overflow-hidden soft-grid">
-      <div className="section-shell flex min-h-screen items-center pt-28">
+    <section
+      id="home"
+      className="relative min-h-screen overflow-hidden soft-grid"
+    >
+      {/* Background decorative glow */}
+      <div className="pointer-events-none absolute left-[-180px] top-[15%] h-[400px] w-[400px] rounded-full bg-teal-400/10 blur-3xl" />
+      <div className="pointer-events-none absolute right-[-180px] top-[25%] h-[450px] w-[450px] rounded-full bg-cyan-400/10 blur-3xl" />
+
+      <div className="section-shell flex min-h-screen items-center pt-28 pb-12">
         <div className="grid w-full items-center gap-12 lg:grid-cols-[1.06fr_0.94fr]">
+
+          {/* ================= LEFT SIDE ================= */}
           <div>
             <motion.div
               className="mb-6 inline-flex items-center gap-2 rounded-full border border-teal-500/20 bg-teal-500/10 px-4 py-2 text-sm font-black text-teal-700 dark:text-teal-200"
@@ -54,6 +66,7 @@ export function Hero() {
               <Sparkles size={16} />
               Available for entry-level software and IT roles
             </motion.div>
+
             <motion.h1
               className="max-w-4xl text-5xl font-black leading-[0.98] text-slate-950 dark:text-white md:text-7xl xl:text-8xl"
               initial={{ opacity: 0, y: 24 }}
@@ -61,16 +74,23 @@ export function Hero() {
               transition={{ duration: 0.65, delay: 0.1 }}
             >
               {profile.name}
-              <span className="gradient-text block">builds useful digital systems.</span>
+
+              <span className="gradient-text block">
+                builds useful digital systems.
+              </span>
             </motion.h1>
+
             <motion.p
               className="mt-6 max-w-2xl text-xl font-bold text-slate-700 dark:text-slate-200 md:text-2xl"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              <span className="typing-caret gradient-text">{typedRole || profile.roles[0].slice(0, 1)}</span>
+              <span className="typing-caret gradient-text">
+                {typedRole || profile.roles[0].slice(0, 1)}
+              </span>
             </motion.p>
+
             <motion.p
               className="mt-5 max-w-2xl text-base leading-8 text-slate-600 dark:text-slate-300 md:text-lg"
               initial={{ opacity: 0, y: 20 }}
@@ -79,42 +99,236 @@ export function Hero() {
             >
               {profile.summary}
             </motion.p>
+
             <motion.div
               className="mt-8 flex flex-wrap gap-3"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.42 }}
             >
-              <button className="btn-primary focus-ring px-5" type="button" onClick={() => scrollToSection('projects')}>
+              <button
+                className="btn-primary focus-ring px-5"
+                type="button"
+                onClick={() => scrollToSection('projects')}
+              >
                 View Projects
                 <ArrowDown size={18} />
               </button>
-              <a className="btn-secondary focus-ring px-5" href={profile.resumeUrl} download>
+
+              <a
+                className="btn-secondary focus-ring px-5"
+                href={profile.resumeUrl}
+                download
+              >
                 <Download size={18} />
                 Download Resume
               </a>
-              <button className="btn-secondary focus-ring px-5" type="button" onClick={() => scrollToSection('contact')}>
+
+              <button
+                className="btn-secondary focus-ring px-5"
+                type="button"
+                onClick={() => scrollToSection('contact')}
+              >
                 <Mail size={18} />
                 Contact Me
               </button>
             </motion.div>
           </div>
 
-          <motion.div className="relative" initial={{ opacity: 0, scale: 0.94, y: 26 }} animate={{ opacity: 1, scale: 1, y: 0 }} transition={{ duration: 0.75, delay: 0.25 }}>
-            <AnimatedAvatar scrollLinked />
+          {/* ================= RIGHT SIDE / ORBIT ================= */}
+          <motion.div
+            className="relative mx-auto w-full max-w-[560px]"
+            initial={{ opacity: 0, scale: 0.94, y: 26 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ duration: 0.75, delay: 0.25 }}
+          >
+
+            {/* Orbit stage */}
+            <div className="relative mx-auto aspect-square w-full max-w-[500px]">
+
+              {/* Outer glow */}
+              <div className="absolute inset-[10%] rounded-full bg-teal-400/10 blur-3xl" />
+
+              {/* OUTER ORBIT */}
+              <motion.div
+                className="absolute inset-[2%] rounded-full border border-teal-400/15"
+                animate={{ rotate: 360 }}
+                transition={{
+                  duration: 28,
+                  repeat: Infinity,
+                  ease: 'linear',
+                }}
+              >
+                {/* Orbit dot */}
+                <div className="absolute left-1/2 top-[-5px] h-3 w-3 -translate-x-1/2 rounded-full bg-teal-400 shadow-[0_0_20px_rgba(45,212,191,0.8)]" />
+              </motion.div>
+
+              {/* MIDDLE ORBIT */}
+              <motion.div
+                className="absolute inset-[12%] rounded-full border border-cyan-400/20"
+                animate={{ rotate: -360 }}
+                transition={{
+                  duration: 20,
+                  repeat: Infinity,
+                  ease: 'linear',
+                }}
+              >
+                <div className="absolute right-[-5px] top-1/2 h-3 w-3 -translate-y-1/2 rounded-full bg-cyan-400 shadow-[0_0_20px_rgba(34,211,238,0.8)]" />
+              </motion.div>
+
+              {/* INNER ORBIT */}
+              <motion.div
+                className="absolute inset-[21%] rounded-full border border-teal-300/20"
+                animate={{ rotate: 360 }}
+                transition={{
+                  duration: 14,
+                  repeat: Infinity,
+                  ease: 'linear',
+                }}
+              >
+                <div className="absolute bottom-[-5px] left-1/2 h-2.5 w-2.5 -translate-x-1/2 rounded-full bg-teal-300 shadow-[0_0_15px_rgba(94,234,212,0.9)]" />
+              </motion.div>
+
+              {/* Floating skill — TOP */}
+              <motion.div
+                className="absolute left-1/2 top-[3%] z-20 -translate-x-1/2"
+                animate={{ y: [0, -8, 0] }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: 'easeInOut',
+                }}
+              >
+                <div className="rounded-full border border-teal-400/20 bg-white/80 px-4 py-2 text-xs font-black text-slate-700 shadow-lg backdrop-blur-xl dark:bg-slate-900/80 dark:text-teal-200">
+                  ✦ UI / UX
+                </div>
+              </motion.div>
+
+              {/* Floating skill — LEFT */}
+              <motion.div
+                className="absolute left-[2%] top-[38%] z-20"
+                animate={{ x: [-3, 3, -3] }}
+                transition={{
+                  duration: 4,
+                  repeat: Infinity,
+                  ease: 'easeInOut',
+                }}
+              >
+                <div className="rounded-full border border-cyan-400/20 bg-white/80 px-4 py-2 text-xs font-black text-slate-700 shadow-lg backdrop-blur-xl dark:bg-slate-900/80 dark:text-cyan-200">
+                  ⚛ React
+                </div>
+              </motion.div>
+
+              {/* Floating skill — RIGHT */}
+              <motion.div
+                className="absolute right-[1%] top-[43%] z-20"
+                animate={{ x: [3, -3, 3] }}
+                transition={{
+                  duration: 4.5,
+                  repeat: Infinity,
+                  ease: 'easeInOut',
+                }}
+              >
+                <div className="rounded-full border border-teal-400/20 bg-white/80 px-4 py-2 text-xs font-black text-slate-700 shadow-lg backdrop-blur-xl dark:bg-slate-900/80 dark:text-teal-200">
+                  ✨ AI Artist
+                </div>
+              </motion.div>
+
+              {/* Floating skill — BOTTOM */}
+              <motion.div
+                className="absolute bottom-[5%] left-1/2 z-20 -translate-x-1/2"
+                animate={{ y: [0, 8, 0] }}
+                transition={{
+                  duration: 3.5,
+                  repeat: Infinity,
+                  ease: 'easeInOut',
+                }}
+              >
+                <div className="rounded-full border border-cyan-400/20 bg-white/80 px-4 py-2 text-xs font-black text-slate-700 shadow-lg backdrop-blur-xl dark:bg-slate-900/80 dark:text-cyan-200">
+                  🛡 Cybersecurity
+                </div>
+              </motion.div>
+
+              {/* CENTER AVATAR */}
+              <div className="absolute inset-[25%] z-10 flex items-center justify-center">
+                <div className="relative h-full w-full">
+
+                  {/* Avatar glow */}
+                  <div className="absolute inset-[-10%] rounded-full bg-gradient-to-r from-teal-400/20 via-cyan-400/10 to-teal-400/20 blur-2xl" />
+
+                  {/* Avatar border */}
+                  <div className="absolute inset-0 rounded-full border border-teal-400/30 bg-white/10 p-2 shadow-[0_0_60px_rgba(45,212,191,0.15)] backdrop-blur-sm dark:bg-white/5">
+
+                    <div className="h-full w-full overflow-hidden rounded-full">
+                      <AnimatedAvatar scrollLinked />
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+
+              {/* Small decorative dots */}
+              <motion.div
+                className="absolute left-[17%] top-[18%] h-2 w-2 rounded-full bg-teal-400"
+                animate={{ opacity: [0.3, 1, 0.3], scale: [1, 1.4, 1] }}
+                transition={{ duration: 2, repeat: Infinity }}
+              />
+
+              <motion.div
+                className="absolute bottom-[20%] right-[18%] h-2 w-2 rounded-full bg-cyan-400"
+                animate={{ opacity: [0.3, 1, 0.3], scale: [1, 1.5, 1] }}
+                transition={{ duration: 2.4, repeat: Infinity }}
+              />
+
+              <motion.div
+                className="absolute right-[20%] top-[20%] h-1.5 w-1.5 rounded-full bg-teal-300"
+                animate={{ opacity: [0.2, 1, 0.2] }}
+                transition={{ duration: 1.8, repeat: Infinity }}
+              />
+
+            </div>
+
+            {/* ================= STATS ================= */}
             <div className="mt-5 grid grid-cols-2 gap-3">
               {stats.map((stat) => (
-                <div key={stat.label} className="glass rounded-lg p-4">
-                  <strong className="block text-2xl font-black gradient-text">{stat.value}</strong>
-                  <span className="text-xs font-bold uppercase tracking-[0.14em] text-slate-500 dark:text-slate-300">{stat.label}</span>
-                </div>
+                <motion.div
+                  key={stat.label}
+                  className="glass rounded-lg p-4"
+                  whileHover={{ y: -4, scale: 1.02 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <strong className="block text-2xl font-black gradient-text">
+                    {stat.value}
+                  </strong>
+
+                  <span className="text-xs font-bold uppercase tracking-[0.14em] text-slate-500 dark:text-slate-300">
+                    {stat.label}
+                  </span>
+                </motion.div>
               ))}
             </div>
+
+            {/* ================= SOCIALS ================= */}
             <div className="mt-5 flex gap-3">
-              <a className="icon-btn focus-ring h-12 w-12 border border-slate-300/70 bg-white/70 text-slate-800 dark:border-white/10 dark:bg-white/10 dark:text-white" href={profile.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn" title="LinkedIn">
+              <a
+                className="icon-btn focus-ring h-12 w-12 border border-slate-300/70 bg-white/70 text-slate-800 dark:border-white/10 dark:bg-white/10 dark:text-white"
+                href={profile.linkedin}
+                target="_blank"
+                rel="noreferrer"
+                aria-label="LinkedIn"
+                title="LinkedIn"
+              >
                 <FaLinkedinIn />
               </a>
-              <a className="icon-btn focus-ring h-12 w-12 border border-slate-300/70 bg-white/70 text-slate-800 dark:border-white/10 dark:bg-white/10 dark:text-white" href={profile.github} target="_blank" rel="noreferrer" aria-label="GitHub" title="GitHub">
+
+              <a
+                className="icon-btn focus-ring h-12 w-12 border border-slate-300/70 bg-white/70 text-slate-800 dark:border-white/10 dark:bg-white/10 dark:text-white"
+                href={profile.github}
+                target="_blank"
+                rel="noreferrer"
+                aria-label="GitHub"
+                title="GitHub"
+              >
                 <FaGithub />
               </a>
             </div>
